@@ -1,5 +1,5 @@
 Project name : Remmina Plugin ULTRAVNC
-Remmina protocol plugin to connect via VNC using (external) UltraVNC.
+Remmina protocol plugin to connect via VNC using UltraVNC viewer.
 
 Copyright (C) 2013 Fabio Castelli <muflone@vbsimple.net>
 
