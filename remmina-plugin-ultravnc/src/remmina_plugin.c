@@ -156,7 +156,7 @@ static const RemminaProtocolSetting remmina_plugin_basic_settings[] =
 {
   { REMMINA_PROTOCOL_SETTING_TYPE_TEXT, "server", N_("Server"), FALSE, NULL, NULL },
   { REMMINA_PROTOCOL_SETTING_TYPE_PASSWORD, NULL, NULL, FALSE, NULL, NULL },
-  { REMMINA_PROTOCOL_SETTING_TYPE_CHECK, "replacedollar", N_("Force replace \$ in \\$ in the password"), FALSE, NULL, NULL },
+  { REMMINA_PROTOCOL_SETTING_TYPE_CHECK, "replacedollar", N_("Force replace $ in \\$ in the password"), FALSE, NULL, NULL },
   { REMMINA_PROTOCOL_SETTING_TYPE_END, NULL, NULL, FALSE, NULL, NULL }
 };
 
