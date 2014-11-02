@@ -65,7 +65,7 @@ static gboolean remmina_plugin_open_connection(RemminaProtocolWidget *gp)
     argv[argc++] = g_strdup("-password");
     // Replace \$ in \\$ in the password
     if (GET_PLUGIN_BOOLEAN("replacedollar"))
-      option_str = g_strdup(g_strjoinv("\\$", g_strsplit(option_str, "$", -1)))
+      option_str = g_strdup(g_strjoinv("\\$", g_strsplit(option_str, "$", -1)));
     argv[argc++] = g_strdup(option_str);
   }
 
