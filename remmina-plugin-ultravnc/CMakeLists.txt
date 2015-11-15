@@ -22,8 +22,8 @@ set(REMMINA_PLUGIN_SRCS
 )
 add_library(remmina-plugin-ultravnc ${REMMINA_PLUGIN_SRCS})
 set_target_properties(remmina-plugin-ultravnc PROPERTIES PREFIX "")
-include_directories(${GTK_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/remmina-plugins)
+target_link_libraries(remmina-plugin-ultravnc ${REMMINA_COMMON_LIBRARIES})
 
 install(TARGETS remmina-plugin-ultravnc DESTINATION ${REMMINA_PLUGINDIR})
 
