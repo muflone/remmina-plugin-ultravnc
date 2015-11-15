@@ -1,8 +1,47 @@
-    Project: Remmina Plugin ULTRAVNC
-Description: Remmina protocol plugin to connect via VNC using UltraVNC viewer.
-     Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
-  Copyright: 2013-2016 Fabio Castelli (Muflone)
-    License: GPL-2+
+# Remmina Plugin ULTRAVNC
+
+**Author**: Fabio Castelli (Muflone) <muflone@vbsimple.net>
+
+**Home page**: http://www.muflone.com/remmina-plugin-ultravnc/
+
+**Copyright**: 2013-2016 Fabio Castelli (Muflone)
+
+**License**: GPL-2+
+
+**Status**: [![Build Status](https://travis-ci.org/muflone/remmina-plugin-ultravnc.svg?branch=master)](https://travis-ci.org/muflone/remmina-plugin-ultravnc)
+
+## Description
+
+A [**Remmina**](https://github.com/freerdp/remmina) protocol plugin to to
+connect to a remote host via VNC using UltraVNC viewer.
+
+![Main window](http://www.muflone.com/resources/remmina-plugin-ultravnc/archive/latest/english/general.png)
+
+## Install instructions
+
+Download and extract [**Remmina Plugin Builder**](https://github.com/muflone/remmina-plugin-builder/releases/):
+
+    wget -O remmina-plugin-builder.tar.gz https://github.com/muflone/remmina-plugin-builder/archive/1.2.1.0.tar.gz
+    tar --extract --verbose --gzip --file remmina-plugin-builder.tar.gz
+  
+Copy the plugin source files to the **remmina-plugin-to-build** directory:
+
+    cp --recursive remmina-plugin-ultravnc CMakeLists.txt remmina-plugin-builder-1.2.1.0/remmina-plugin-to-build/
+
+Build the plugin using Remmina Plugin Builder:
+
+    cd remmina-plugin-builder-1.2.1.0
+    cmake -DCMAKE_INSTALL_PREFIX=/usr .
+    make
+  
+Install the plugin into the Remmina plugins directory (may need sudo or root
+access):
+
+    sudo make install
+
+You'll find it in the remmina connection editor.
+
+## License
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
