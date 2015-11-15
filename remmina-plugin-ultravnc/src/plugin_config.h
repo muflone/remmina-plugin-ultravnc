@@ -24,6 +24,6 @@
 
   #define PLUGIN_NAME        "ULTRAVNC"
   #define PLUGIN_DESCRIPTION "ULTRAVNC - Open a VNC connection with UltraVNC viewer"
-  #define PLUGIN_VERSION     "1.1.1.0"
+  #define PLUGIN_VERSION     "1.2.0.0"
   #define PLUGIN_APPICON     "remmina-ultravnc"
 #endif
