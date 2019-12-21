@@ -1,7 +1,7 @@
 #     Project: Remmina Plugin ULTRAVNC
 # Description: Remmina protocol plugin to connect via VNC using UltraVNC viewer.
-#      Author: Fabio Castelli (Muflone) <muflone@vbsimple.net>
-#   Copyright: 2013-2016 Fabio Castelli (Muflone)
+#      Author: Fabio Castelli (Muflone) <muflone@muflone.com>
+#   Copyright: 2013-2019 Fabio Castelli (Muflone)
 #     License: GPL-2+
 #
 # This program is free software; you can redistribute it and/or modify
