@@ -22,8 +22,7 @@
 #include "plugin_config.h"
 #include <remmina/remmina_plugin.h>
 
-typedef struct
-{
+typedef struct {
   GtkTextView *text_view;
   GtkTextBuffer *text_buffer;
   GPid pid;
@@ -31,8 +30,8 @@ typedef struct
 
 static RemminaPluginService *remmina_plugin_service = NULL;
 
-static void remmina_plugin_ultravnc_init(RemminaProtocolWidget *gp)
-{
+/* Initialize plugin */
+static void remmina_plugin_ultravnc_init(RemminaProtocolWidget *gp) {
   TRACE_CALL(__func__);
   RemminaPluginData *gpdata;
   remmina_plugin_service->log_printf("[%s] Plugin init\n", PLUGIN_NAME);
@@ -48,8 +47,8 @@ static void remmina_plugin_ultravnc_init(RemminaProtocolWidget *gp)
   g_object_set_data_full(G_OBJECT(gp), "plugin-data", gpdata, g_free);
 }
 
-static gboolean remmina_plugin_ultravnc_open_connection(RemminaProtocolWidget *gp)
-{
+/* Open connection */
+static gboolean remmina_plugin_ultravnc_open_connection(RemminaProtocolWidget *gp) {
   TRACE_CALL(__func__);
   RemminaFile *remminafile;
   gboolean ret;
@@ -64,13 +63,11 @@ static gboolean remmina_plugin_ultravnc_open_connection(RemminaProtocolWidget *g
 
   #define GET_PLUGIN_STRING(value) \
     g_strdup(remmina_plugin_service->file_get_string(remminafile, value))
-  #define ADD_ARGUMENT(name, value) \
-    { \
+  #define ADD_ARGUMENT(name, value) { \
       argv[argc] = g_strdup(name); \
       argv_debug[argc] = g_strdup(name); \
       argc++; \
-      if (value != NULL) \
-      { \
+      if (value != NULL) { \
         argv[argc] = value; \
         argv_debug[argc++] = g_strdup(g_strcmp0(name, "-p") != 0 ? value : "XXXXX"); \
       } \
@@ -89,8 +86,7 @@ static gboolean remmina_plugin_ultravnc_open_connection(RemminaProtocolWidget *g
   ADD_ARGUMENT(option_str, NULL);
   // The password to authenticate with
   option_str = GET_PLUGIN_STRING("password");
-  if (option_str)
-  {
+  if (option_str) {
     ADD_ARGUMENT("-password", option_str);
   }
   // End of the arguments list
@@ -103,22 +99,20 @@ static gboolean remmina_plugin_ultravnc_open_connection(RemminaProtocolWidget *g
   ret = g_spawn_async(NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, &gpdata->pid, &error);
   remmina_plugin_service->log_printf("[ULTRAVNC] started ultravnc-viewer with GPid %d\n", &gpdata->pid);
   // Free the arguments list
-  for (i = 0; i < argc; i++)
-  {
+  for (i = 0; i < argc; i++) {
     g_free(argv_debug[i]);
     g_free(argv[i]);
   }
   // Show error message
-  if (!ret)
-  {
+  if (!ret) {
     remmina_plugin_service->protocol_plugin_set_error(gp, "%s", error->message);
   }
   remmina_plugin_service->protocol_plugin_signal_connection_opened(gp);
   return TRUE;
 }
 
-static gboolean remmina_plugin_ultravnc_close_connection(RemminaProtocolWidget *gp)
-{
+/* Close connection */
+static gboolean remmina_plugin_ultravnc_close_connection(RemminaProtocolWidget *gp) {
   TRACE_CALL(__func__);
   remmina_plugin_service->log_printf("[%s] Plugin close connection\n", PLUGIN_NAME);
   remmina_plugin_service->protocol_plugin_signal_connection_closed(gp);
@@ -134,16 +128,14 @@ static gboolean remmina_plugin_ultravnc_close_connection(RemminaProtocolWidget *
  * e) Values for REMMINA_PROTOCOL_SETTING_TYPE_SELECT or REMMINA_PROTOCOL_SETTING_TYPE_COMBO
  * f) Setting tooltip
  */
-static const RemminaProtocolSetting remmina_plugin_ultravnc_basic_settings[] =
-{
+static const RemminaProtocolSetting remmina_plugin_ultravnc_basic_settings[] = {
   { REMMINA_PROTOCOL_SETTING_TYPE_SERVER, "server", NULL, FALSE, NULL, NULL },
   { REMMINA_PROTOCOL_SETTING_TYPE_PASSWORD, "password", N_("User password"), FALSE, NULL, NULL },
   { REMMINA_PROTOCOL_SETTING_TYPE_END, NULL, NULL, FALSE, NULL, NULL }
 };
 
 /* Protocol plugin definition and features */
-static RemminaProtocolPlugin remmina_plugin =
-{
+static RemminaProtocolPlugin remmina_plugin = {
   REMMINA_PLUGIN_TYPE_PROTOCOL,                 // Type
   PLUGIN_NAME,                                  // Name
   PLUGIN_DESCRIPTION,                           // Description
@@ -164,13 +156,11 @@ static RemminaProtocolPlugin remmina_plugin =
   NULL                                          // Screenshot support
 };
 
-G_MODULE_EXPORT gboolean remmina_plugin_entry(RemminaPluginService *service)
-{
+G_MODULE_EXPORT gboolean remmina_plugin_entry(RemminaPluginService *service) {
   TRACE_CALL(__func__);
   remmina_plugin_service = service;
 
-  if (!service->register_plugin((RemminaPlugin *) &remmina_plugin))
-  {
+  if (!service->register_plugin((RemminaPlugin *) &remmina_plugin)) {
     return FALSE;
   }
   return TRUE;
